@@ -7,7 +7,6 @@
 
 import Foundation
 import UIKit
-import DKImagePickerController
 
 open class CustomPhotosPermissionsManager: DKImagePickerControllerBaseUIDelegate {
     var actionLabel: UILabel = {
