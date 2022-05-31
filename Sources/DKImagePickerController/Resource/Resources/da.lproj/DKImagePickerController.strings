@@ -29,3 +29,9 @@
 "picker.select.maxLimitReached.error.title" = "Grænsen for antal billeder er nået";
 
 "picker.select.maxLimitReached.error.message" = "Du kan maksimalt tilføje %@ billeder";
+
+"limited.photo.access" = "You have Limited Bikers from accessing your photos";
+
+"select.more.photos" = "Select more photos";
+
+"change.settings" = "Change Settings";

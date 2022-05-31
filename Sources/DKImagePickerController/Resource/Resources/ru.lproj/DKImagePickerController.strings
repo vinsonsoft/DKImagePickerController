@@ -29,3 +29,9 @@
 "picker.select.maxLimitReached.error.title" = "Достигнут лимит фото";
 
 "picker.select.maxLimitReached.error.message" = "Вы можете выбрать %@ фото";
+
+"limited.photo.access" = "You have Limited Bikers from accessing your photos";
+
+"select.more.photos" = "Select more photos";
+
+"change.settings" = "Change Settings";

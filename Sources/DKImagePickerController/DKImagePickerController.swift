@@ -8,7 +8,7 @@
 
 import UIKit
 import Photos
-
+import PhotosUI
 /**
  - AllPhotos: Get all photos assets in the assets group.
  - AllVideos: Get all video assets in the assets group.
@@ -617,6 +617,45 @@ open class DKImagePickerController: DKUINavigationController, DKImageBaseManager
         self.UIDelegate.updateDoneButtonTitle(self.UIDelegate.doneButton!)
     }
     
+    @objc open func managePermission() {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        if #available(iOS 14, *) {
+            let selectMorePhotosAction = UIAlertAction(title: DKImagePickerControllerResource.localizedStringWithKey("select.more.photos") , style: .default) { [weak self] action in
+                guard let self = self else { return }
+                
+                PHPhotoLibrary.shared().presentLimitedLibraryPicker(from: self)
+                
+            }
+            alert.addAction(selectMorePhotosAction)
+        }
+        
+        let changeSettingsAction = UIAlertAction(title: DKImagePickerControllerResource.localizedStringWithKey("change.settings"), style: .default) { [weak self] action in
+            guard let self = self else { return }
+            guard let url = URL(string: UIApplication.openSettingsURLString),
+                  UIApplication.shared.canOpenURL(url) else {
+                assertionFailure("Not able to open App privacy settings")
+                return
+            }
+            
+            if #available(iOS 10.0, *) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            } else {
+                // Fallback on earlier versions
+            }
+        }
+        alert.addAction(changeSettingsAction)
+        
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: {
+            action in
+            alert.dismiss(animated: true, completion: nil)
+        }))
+        
+        present(alert, animated: true, completion: nil)
+        
+    }
+    
     @objc open func deselect(asset: DKAsset) {
         removeSelection(asset: asset)
         
@@ -800,6 +839,23 @@ open class DKImagePickerController: DKUINavigationController, DKImageBaseManager
         }
         
         self.extensionController.perform(extensionType: .gallery, with: extraInfo)
+    }
+    
+}
+
+extension DKImagePickerController: PHPhotoLibraryChangeObserver {
+    
+    public func photoLibraryDidChange(_ changeInstance: PHChange) {
+        DispatchQueue.main.async { [unowned self] in
+            // Obtain authorization status and update UI accordingly
+            if #available(iOS 14, *) {
+                let status = PHPhotoLibrary.authorizationStatus(for: .readWrite)
+                self.reload(with: self.groupDataManager)
+            } else {
+                // Fallback on earlier versions
+            }
+            
+        }
     }
     
 }

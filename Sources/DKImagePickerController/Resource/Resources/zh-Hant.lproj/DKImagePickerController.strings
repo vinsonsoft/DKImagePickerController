@@ -29,3 +29,9 @@
 "picker.select.maxLimitReached.error.title" = "最大張數限制";
 
 "picker.select.maxLimitReached.error.message" = "你可以選%@張";
+
+"limited.photo.access" = "You have Limited Bikers from accessing your photos";
+
+"select.more.photos" = "Select more photos";
+
+"change.settings" = "Change Settings";

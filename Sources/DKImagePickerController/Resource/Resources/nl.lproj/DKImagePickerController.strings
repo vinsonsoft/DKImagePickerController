@@ -29,3 +29,9 @@
 "picker.select.maxLimitReached.error.title" = "Maximale fotolimiet is bereikt";
 
 "picker.select.maxLimitReached.error.message" = "U kunt nog %@ foto's kiezen";
+
+"limited.photo.access" = "You have Limited Bikers from accessing your photos";
+
+"select.more.photos" = "Select more photos";
+
+"change.settings" = "Change Settings";

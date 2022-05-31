@@ -29,3 +29,9 @@
 "picker.select.maxLimitReached.error.title" = "تصاویر کی مقررہ تعداد پوری ہوگئی";
 
 "picker.select.maxLimitReached.error.message" = "آپ %@ تصاویر منتخب کر سکتے ہیں";
+
+"limited.photo.access" = "You have Limited Bikers from accessing your photos";
+
+"select.more.photos" = "Select more photos";
+
+"change.settings" = "Change Settings";

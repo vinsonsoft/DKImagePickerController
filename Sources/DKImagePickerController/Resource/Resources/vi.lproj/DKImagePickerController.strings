@@ -29,3 +29,9 @@
 "picker.select.maxLimitReached.error.title" = "Số lượng ảnh đã đạt giới hạn";
 
 "picker.select.maxLimitReached.error.message" = "Bạn có thể chọn %@ mục";
+
+"limited.photo.access" = "You have Limited Bikers from accessing your photos";
+
+"select.more.photos" = "Select more photos";
+
+"change.settings" = "Change Settings";

@@ -29,3 +29,9 @@
 "picker.select.maxLimitReached.error.title" = "選択可能枚数に到達しました";
 
 "picker.select.maxLimitReached.error.message" = "%@ 枚まで選択することができます";
+
+"limited.photo.access" = "You have Limited Bikers from accessing your photos";
+
+"select.more.photos" = "Select more photos";
+
+"change.settings" = "Change Settings";

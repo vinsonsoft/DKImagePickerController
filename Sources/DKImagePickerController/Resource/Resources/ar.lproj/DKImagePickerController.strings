@@ -29,3 +29,9 @@
 "picker.select.maxLimitReached.error.title" = "بلغت الصور الحد المسموح به";
 
 "picker.select.maxLimitReached.error.message" = "يمكنك تحديد %@ من العناصر";
+ 
+"limited.photo.access" = "You have Limited Bikers from accessing your photos";
+
+"select.more.photos" = "Select more photos";
+
+"change.settings" = "Change Settings";

@@ -61,6 +61,15 @@ open class DKAssetGroupDetailVC: UIViewController,
             return
         }
 
+        if #available(iOS 14, *) {
+            let accessLevel: PHAccessLevel = .readWrite
+            let authorizationStatus = PHPhotoLibrary.authorizationStatus(for: accessLevel)
+            
+            if authorizationStatus == .limited {
+                imagePickerController.UIDelegate = CustomView()
+            }
+        }
+        
         imagePickerController.add(observer: self)
 
 		let layout = imagePickerController.UIDelegate.layoutForImagePickerController(imagePickerController).init()
