@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import DKImagePickerController
 
-open class CustomView: DKImagePickerControllerBaseUIDelegate {
+open class CustomPhotosPermissionsManager: DKImagePickerControllerBaseUIDelegate {
     var actionLabel: UILabel = {
         let topLabel = UILabel()
         topLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -25,8 +25,8 @@ open class CustomView: DKImagePickerControllerBaseUIDelegate {
         let actionButton = UIButton()
         actionButton.translatesAutoresizingMaskIntoConstraints = false
         actionButton.backgroundColor = .systemBlue
-        actionButton.setTitle("manage", for: .normal)
-        actionButton.layer.cornerRadius = 6
+        actionButton.setTitle(DKImagePickerControllerResource.localizedStringWithKey("manage"), for: .normal)
+        actionButton.layer.cornerRadius = 17
         return actionButton
     }()
     

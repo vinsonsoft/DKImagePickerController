@@ -66,7 +66,7 @@ open class DKAssetGroupDetailVC: UIViewController,
             let authorizationStatus = PHPhotoLibrary.authorizationStatus(for: accessLevel)
             
             if authorizationStatus == .limited {
-                imagePickerController.UIDelegate = CustomView()
+                imagePickerController.UIDelegate = CustomPhotosPermissionsManager()
             }
         }
         

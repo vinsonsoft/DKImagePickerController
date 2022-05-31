@@ -30,7 +30,9 @@
 
 "picker.select.maxLimitReached.error.message" = "Puedes seleccionar %@ fotos";
 
-"limited.photo.access" = "You have Limited Bikers from accessing your photos";
+"limited.photo.access" = "You've given Ridekin access to only a select number of photos and videos.";
+
+"manage" = "Manage";
 
 "select.more.photos" = "Select more photos";
 
