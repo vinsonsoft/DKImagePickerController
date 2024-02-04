@@ -65,7 +65,7 @@ open class DKImagePickerController: DKUINavigationController, DKImageBaseManager
     }
     
     /// false to prevent dismissal of the picker when the presentation controller will dismiss in response to user action.
-    @available(iOS 13.0, *)
+
     @objc lazy public var shouldDismissViaUserAction = false
     
     /// Forces deselect of previous selected image. allowSwipeToSelect will be ignored.
@@ -240,6 +240,7 @@ open class DKImagePickerController: DKUINavigationController, DKImageBaseManager
             self.needShowInlineCamera = false
             self.showCamera()
         }
+        self.view.backgroundColor = .white
     }
     
     @objc open func makeRootVC() -> UIViewController & DKImagePickerControllerAware {
@@ -593,7 +594,7 @@ open class DKImagePickerController: DKUINavigationController, DKImageBaseManager
             self.notify(with: #selector(DKImagePickerControllerObserver.imagePickerControllerDidSelect(assets:)), object: insertedAssets as AnyObject)
         }
     }
-    
+
     @objc open func handleSelectAll() {
         if let groupDetailVC = self.viewControllers.first as? DKAssetGroupDetailVC, let selectedGroupId = groupDetailVC.selectedGroupId {
             guard let group = self.groupDataManager.fetchGroup(with: selectedGroupId) else {

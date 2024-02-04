@@ -103,6 +103,49 @@ open class DKAssetGroupDetailVC: UIViewController,
         }
     }
 
+    open override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if #available(iOS 13.0, *) {
+            prepareNavBarAppearance()
+        } else {
+            // Fallback on earlier versions
+        }
+    }
+    
+    @available(iOS 13.0, *)
+    func prepareNavBarAppearance() {
+        let standardAppearance = getUINavigationBarStandardAppearance()
+        
+        navigationController?.navigationBar.standardAppearance = standardAppearance
+        navigationController?.navigationBar.compactAppearance = standardAppearance
+        
+        let scrollAppearance = getUINavigationBarScrollAppearance()
+        navigationController?.navigationBar.scrollEdgeAppearance = scrollAppearance
+        
+        navigationController?.navigationBar.tintColor = UIColor.black
+        navigationController?.navigationBar.isTranslucent = false
+    }
+    
+    
+    
+    @available(iOS 13.0, *)
+    func getUINavigationBarStandardAppearance() -> UINavigationBarAppearance {
+        let appearance = UINavigationBarAppearance()
+        appearance.backgroundColor = .white
+        appearance.titleTextAttributes = [.foregroundColor: UIColor.black]
+        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.black]
+        appearance.shadowColor = .systemGray3
+        return appearance
+    }
+    @available(iOS 13.0, *)
+    func getUINavigationBarScrollAppearance() -> UINavigationBarAppearance {
+        let appearance = UINavigationBarAppearance()
+        appearance.backgroundColor = .white
+        appearance.titleTextAttributes = [.foregroundColor: UIColor.black]
+        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.black]
+        appearance.shadowColor = .clear
+        return appearance
+    }
     override open func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
