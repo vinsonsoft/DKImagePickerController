@@ -60,15 +60,16 @@ open class DKAssetGroupDetailVC: UIViewController,
             assertionFailure("Expect imagePickerController")
             return
         }
-
+        var hasLimitedAccess = false
         if #available(iOS 14, *) {
             let accessLevel: PHAccessLevel = .readWrite
             let authorizationStatus = PHPhotoLibrary.authorizationStatus(for: accessLevel)
             
             if authorizationStatus == .limited {
-                imagePickerController.UIDelegate = CustomPhotosPermissionsManager()
+                hasLimitedAccess = true
             }
         }
+        imagePickerController.UIDelegate = CustomPhotosPermissionsManager(hasLimitedAccess: hasLimitedAccess)
         
         imagePickerController.add(observer: self)
 

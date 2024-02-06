@@ -9,40 +9,17 @@ import Foundation
 import UIKit
 
 open class CustomPhotosPermissionsManager: DKImagePickerControllerBaseUIDelegate {
-    var actionLabel: UILabel = {
-        let topLabel = UILabel()
-        topLabel.translatesAutoresizingMaskIntoConstraints = false
-        topLabel.textAlignment = .left
-        topLabel.font = UIFont.systemFont(ofSize: 15)
-        topLabel.textColor = .black
-        topLabel.numberOfLines = 0
-        topLabel.text = DKImagePickerControllerResource.localizedStringWithKey("limited.photo.access")
-        return topLabel
-
-    }()
-    var actionButton: UIButton = {
-        let actionButton = UIButton()
-        actionButton.translatesAutoresizingMaskIntoConstraints = false
-        actionButton.backgroundColor = .systemBlue
-        actionButton.setTitle(DKImagePickerControllerResource.localizedStringWithKey("manage"), for: .normal)
-        actionButton.layer.cornerRadius = 17
-        return actionButton
-    }()
-    
+    let hasLimitedAccess: Bool
+    init(hasLimitedAccess: Bool) {
+        self.hasLimitedAccess = hasLimitedAccess
+    }
     lazy var header: UIView = {
-        let header = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 70))
-        header.backgroundColor = UIColor.white
-        header.addSubview(actionLabel)
-        actionLabel.topAnchor.constraint(equalTo: header.topAnchor, constant: 10).isActive = true
-        actionLabel.leadingAnchor.constraint(equalTo: header.leadingAnchor, constant: 10).isActive = true
-        actionLabel.trailingAnchor.constraint(equalTo: header.trailingAnchor, constant: -120).isActive = true
-        
-        header.addSubview(actionButton)
-        actionButton.topAnchor.constraint(equalTo: header.topAnchor, constant: 10).isActive = true
-        actionButton.trailingAnchor.constraint(equalTo: header.trailingAnchor, constant: -10).isActive = true
-        actionButton.widthAnchor.constraint(equalToConstant: 100).isActive = true
-        actionButton.heightAnchor.constraint(equalToConstant: 35).isActive = true
-        actionButton.addTarget(imagePickerController, action: #selector(DKImagePickerController.managePermission), for: .touchUpInside)
+        let height = hasLimitedAccess ? 230 : 190
+        let width = UIScreen.main.bounds.width
+        let header = ManageCustomView.instance(hasLimitedAccess: hasLimitedAccess,
+                                               frame: CGRect(x: 0, y: 0, width: Int(width), height: height))
+
+        header.editLimitsBtn.addTarget(imagePickerController, action: #selector(DKImagePickerController.managePermission), for: .touchUpInside)
         return header
     }()
     
@@ -66,4 +43,31 @@ open class CustomPhotosPermissionsManager: DKImagePickerControllerBaseUIDelegate
         return self.header
     }
 
+}
+
+public protocol NibInstantiatable {
+    
+    static func nibName() -> String
+    
+}
+
+extension NibInstantiatable {
+    
+    static func nibName() -> String {
+        return String(describing: self)
+    }
+    
+}
+
+extension NibInstantiatable where Self: UIView {
+    
+    static func fromNib() -> Self {
+        
+        let bundle = Bundle(for: self)
+        let nib = bundle.loadNibNamed(nibName(), owner: self, options: nil)
+        
+        return nib!.first as! Self
+        
+    }
+    
 }

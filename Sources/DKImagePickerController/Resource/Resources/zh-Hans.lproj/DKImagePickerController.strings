@@ -30,7 +30,7 @@
 
 "picker.select.maxLimitReached.error.message" = "你能选择%@项";
 
-"limited.photo.access" = "You've given Ridekin access to only a select number of photos and videos.";
+"limited.photo.access" = "You’ve given Ridekin access to a select number of photos and videos.";
 
 "manage" = "Manage";
 
