@@ -18,7 +18,8 @@ Pod::Spec.new do |s|
 
     core.frameworks    = "Foundation", "UIKit", "Photos"
 
-    core.source_files = "Sources/DKImagePickerController/*.{h,swift}", "Sources/DKImagePickerController/View/**/*.swift"
+    core.source_files = "Sources/DKImagePickerController/*.{h,swift,xib,storyboard}", "Sources/DKImagePickerController/View/**/*.swift"
+    core.resources = ['*.{xib}']
   end
 
   s.subspec 'ImageDataManager' do |image|
