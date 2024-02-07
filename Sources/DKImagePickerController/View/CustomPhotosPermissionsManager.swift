@@ -10,18 +10,36 @@ import UIKit
 
 open class CustomPhotosPermissionsManager: DKImagePickerControllerBaseUIDelegate {
     let hasLimitedAccess: Bool
-    init(hasLimitedAccess: Bool) {
+    let hidesCamera: Bool
+    let hidesVideo: Bool
+    init(hasLimitedAccess: Bool, hidesCamera: Bool, hidesVideo: Bool) {
         self.hasLimitedAccess = hasLimitedAccess
+        self.hidesCamera = hidesCamera
+        self.hidesVideo = hidesVideo
     }
     lazy var header: UIView = {
-        let height = hasLimitedAccess ? 230 : 190
+        var height = 0
+        if !hidesCamera || !hidesVideo {
+            height = 40
+        }
+        if hasLimitedAccess {
+            height += 60
+        }
+        height += 135
         let width = UIScreen.main.bounds.width
         let header = ManageCustomView.instance(hasLimitedAccess: hasLimitedAccess,
+                                               hidesCamera: hidesCamera,
+                                               hidesVideo: hidesVideo,
                                                frame: CGRect(x: 0, y: 0, width: Int(width), height: height))
 
         header.editLimitsBtn.addTarget(imagePickerController, action: #selector(DKImagePickerController.managePermission), for: .touchUpInside)
+        header.takePhotoBtn.addTarget(imagePickerController, action: #selector(self.imagePickerController?.presentCamera), for: .touchUpInside)
+        header.recordVideoBtn.addTarget(imagePickerController, action: #selector(self.imagePickerController?.presentCamera), for: .touchUpInside)
         return header
     }()
+    
+
+
     
     override open func prepareLayout(_ imagePickerController: DKImagePickerController, vc: UIViewController) {
         self.imagePickerController = imagePickerController

@@ -31,6 +31,8 @@
 "picker.select.maxLimitReached.error.message" = "آپ %@ تصاویر منتخب کر سکتے ہیں";
 
 "limited.photo.access" = "You’ve given Ridekin access to a select number of photos and videos.";
+"take.a.picture" = "Take a picture";
+"record.a.video" = "Record a video";
 
 "manage" = "Manage";
 

@@ -46,6 +46,7 @@ open class DKAssetGroupDetailVC: UIViewController,
     private var groupListVC: DKAssetGroupListVC?
     private var selectGroupButton: UIButton?
     private var hidesCamera: Bool = false
+    private var hidesVideo: Bool = false
     private var footerView: UIView?
     private var headerView: UIView?
     private var currentViewSize: CGSize?
@@ -60,6 +61,12 @@ open class DKAssetGroupDetailVC: UIViewController,
             assertionFailure("Expect imagePickerController")
             return
         }
+        hidesCamera = imagePickerController.sourceType == .photo
+        || imagePickerController.assetType == .allVideos
+        
+        hidesVideo = imagePickerController.sourceType == .photo
+        || imagePickerController.assetType == .allPhotos
+        
         var hasLimitedAccess = false
         if #available(iOS 14, *) {
             let accessLevel: PHAccessLevel = .readWrite
@@ -69,7 +76,9 @@ open class DKAssetGroupDetailVC: UIViewController,
                 hasLimitedAccess = true
             }
         }
-        imagePickerController.UIDelegate = CustomPhotosPermissionsManager(hasLimitedAccess: hasLimitedAccess)
+        imagePickerController.UIDelegate = CustomPhotosPermissionsManager(hasLimitedAccess: hasLimitedAccess,
+                                                                          hidesCamera: hidesCamera,
+                                                                          hidesVideo: hidesVideo)
         
         imagePickerController.add(observer: self)
 
@@ -93,7 +102,7 @@ open class DKAssetGroupDetailVC: UIViewController,
             view.addSubview(headerView)
         }
 
-		hidesCamera = imagePickerController.sourceType == .photo
+
 		checkPhotoPermission()
 
         if imagePickerController.allowSwipeToSelect && !imagePickerController.singleSelect {
