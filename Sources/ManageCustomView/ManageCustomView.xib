@@ -113,6 +113,7 @@
             <connections>
                 <outlet property="LimittedPermisionLbl" destination="Djh-Av-I4f" id="EAd-aU-Ice"/>
                 <outlet property="LimittedPermisionView" destination="9hg-Wk-xlm" id="J3B-IT-Q25"/>
+                <outlet property="cameraView" destination="IHJ-mH-IXV" id="SKM-03-BgM"/>
                 <outlet property="editLimitsBtn" destination="yeM-Gl-AX1" id="tdr-QF-Qtz"/>
                 <outlet property="recordVideoBtn" destination="1kE-1i-BAn" id="O5U-Qx-S9m"/>
                 <outlet property="takePhotoBtn" destination="L3d-k3-EbD" id="YBz-xd-jsL"/>

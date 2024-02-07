@@ -30,7 +30,9 @@
 
 "picker.select.maxLimitReached.error.message" = "%@ 枚まで選択することができます";
 
-"limited.photo.access" = "You've given Ridekin access to only a select number of photos and videos.";
+"limited.photo.access" = "You’ve given Ridekin access to a select number of photos and videos.";
+"take.a.picture" = "Take a picture";
+"record.a.video" = "Record a video";
 
 "manage" = "Manage";
 

@@ -31,6 +31,8 @@
 "picker.select.maxLimitReached.error.message" = "يمكنك تحديد %@ من العناصر";
  
 "limited.photo.access" = "You’ve given Ridekin access to a select number of photos and videos.";
+"take.a.picture" = "Take a picture";
+"record.a.video" = "Record a video";
 
 "manage" = "Manage";
 
@@ -38,5 +40,3 @@
 
 "change.settings" = "Change Settings";
 
-"take.a.picture" = "Take a picture";
-"record.a.video" = "Record a video";
