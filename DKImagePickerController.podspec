@@ -25,7 +25,9 @@ Pod::Spec.new do |s|
     core.source_files = "Sources/DKImagePickerController/*.{h,swift,xib,storyboard}", "Sources/DKImagePickerController/View/**/*.swift"
     core.resources = ['*.{xib}']
   end
-
+  s.subspec 'ManageCustomView' do |manageCustomView|
+    manageCustomView.source_files = "Sources/ManageCustomView/**/*.{h,swift,xib,storyboard}"
+  end
   s.subspec 'ImageDataManager' do |image|
     image.source_files = "Sources/DKImageDataManager/**/*.swift"
   end
