@@ -18,6 +18,7 @@ Pod::Spec.new do |s|
   s.subspec 'Core' do |core|
     core.dependency 'DKImagePickerController/ImageDataManager'
     core.dependency 'DKImagePickerController/Resource'
+    core.dependency 'DKImagePickerController/ManageCustomView'
 
     core.frameworks    = "Foundation", "UIKit", "Photos"
 
