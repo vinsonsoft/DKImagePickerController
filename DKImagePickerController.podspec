@@ -12,17 +12,14 @@ Pod::Spec.new do |s|
   s.requires_arc  = true
   s.swift_version = ['4.2', '5']
   
-  s.source_files = '*.{h,m,xib,swift}'
-  s.resources = ['*.{xib}']
-  
   s.subspec 'Core' do |core|
     core.dependency 'DKImagePickerController/ImageDataManager'
     core.dependency 'DKImagePickerController/Resource'
-
+    core.dependency 'DKImagePickerController/ManageCustomView'
+    
     core.frameworks    = "Foundation", "UIKit", "Photos"
 
-    core.source_files = "Sources/DKImagePickerController/*.{h,swift,xib,storyboard}", "Sources/DKImagePickerController/View/**/*.swift"
-    core.resources = ['*.{xib}']
+    core.source_files = "Sources/DKImagePickerController/*.{h,swift}", "Sources/DKImagePickerController/View/**/*.swift"
   end
 
   s.subspec 'ImageDataManager' do |image|
