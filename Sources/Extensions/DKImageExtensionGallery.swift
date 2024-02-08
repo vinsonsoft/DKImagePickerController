@@ -69,8 +69,7 @@ open class DKImageExtensionGallery: DKImageBaseExtension, DKPhotoGalleryDelegate
         gallery.presentingFromImageView = presentingFromImageView
         gallery.presentationIndex = presentationIndex ?? 0
         gallery.finishedBlock = { dismissIndex, dismissItem in
-            let cellIndex = groupDetailVC.adjustAssetIndex(dismissIndex)
-            let cellIndexPath = IndexPath(row: cellIndex, section: 0)
+            let cellIndexPath = IndexPath(row: dismissIndex, section: 0)
             groupDetailVC.scroll(to: cellIndexPath)
             
             return groupDetailVC.thumbnailImageView(for: cellIndexPath)

@@ -45,8 +45,12 @@ public class DKAssetGroupDetailImageCell: DKAssetGroupDetailBaseCell {
         
         internal lazy var checkLabel: UILabel = {
             let label = UILabel()
-            label.textAlignment = .right
-            
+            label.textAlignment = .center
+            label.layer.cornerRadius = 12
+            label.layer.borderWidth = 2
+            label.layer.borderColor = UIColor.white.cgColor
+            label.layer.masksToBounds = true
+            label.backgroundColor = .systemBlue
             return label
         }()
         
@@ -65,7 +69,7 @@ public class DKAssetGroupDetailImageCell: DKAssetGroupDetailBaseCell {
             super.layoutSubviews()
             
             self.checkImageView.frame = self.bounds
-            self.checkLabel.frame = CGRect(x: 0, y: 5, width: self.bounds.width - 5, height: 20)
+            self.checkLabel.frame = CGRect(x: self.bounds.width - 36, y: 12, width:  24, height: 24)
         }
         
     } /* DKImageCheckView */

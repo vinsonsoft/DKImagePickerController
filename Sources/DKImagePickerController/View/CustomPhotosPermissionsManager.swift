@@ -25,16 +25,30 @@ open class CustomPhotosPermissionsManager: DKImagePickerControllerBaseUIDelegate
         if hasLimitedAccess {
             height += 60
         }
-        height += 135
+
+        if hasLimitedAccess || !hidesCamera || !hidesVideo {
+            height += 16
+        }
+        
         let width = UIScreen.main.bounds.width
-        let header = ManageCustomView.instance(hasLimitedAccess: hasLimitedAccess,
+        let manageCustomView = ManageCustomView.instance(hasLimitedAccess: hasLimitedAccess,
                                                hidesCamera: hidesCamera,
                                                hidesVideo: hidesVideo,
                                                frame: CGRect(x: 0, y: 0, width: Int(width), height: height))
 
-        header.editLimitsBtn.addTarget(imagePickerController, action: #selector(DKImagePickerController.managePermission), for: .touchUpInside)
-        header.takePhotoBtn.addTarget(imagePickerController, action: #selector(self.imagePickerController?.presentCamera), for: .touchUpInside)
-        header.recordVideoBtn.addTarget(imagePickerController, action: #selector(self.imagePickerController?.presentCamera), for: .touchUpInside)
+        manageCustomView.editLimitsBtn.addTarget(imagePickerController, action: #selector(DKImagePickerController.managePermission), for: .touchUpInside)
+        manageCustomView.takePhotoBtn.addTarget(imagePickerController, action: #selector(self.imagePickerController?.presentCamera), for: .touchUpInside)
+        manageCustomView.recordVideoBtn.addTarget(imagePickerController, action: #selector(self.imagePickerController?.presentCamera), for: .touchUpInside)
+        
+        let header = UIView(frame: CGRect(x: 0, y: 0,
+                                          width: Int(UIScreen.main.bounds.width), height: height))
+        
+        header.addSubview(manageCustomView)
+        manageCustomView.topAnchor.constraint(equalTo: header.topAnchor).isActive = true
+        manageCustomView.bottomAnchor.constraint(equalTo: header.bottomAnchor).isActive = true
+        manageCustomView.leadingAnchor.constraint(equalTo: header.leadingAnchor).isActive = true
+        manageCustomView.trailingAnchor.constraint(equalTo: header.trailingAnchor).isActive = true
+
         return header
     }()
     

@@ -30,8 +30,8 @@ public class DKImagePickerControllerResource: NSObject {
     @objc public static var customImageBlock: ((_ imageName: String) -> UIImage?)?
 	
     public class func checkedImage() -> UIImage {
-        return imageForResource("checked_background", stretchable: true, cacheable: true)
-            .withRenderingMode(.alwaysTemplate)
+        return imageForResource("ic_selected_image", stretchable: true, cacheable: true)
+ 
     }
     
     public class func blueTickImage() -> UIImage {

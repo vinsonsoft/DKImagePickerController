@@ -18,8 +18,8 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fEf-sz-4Fd">
                     <rect key="frame" x="0.0" y="0.0" width="418" height="262"/>
                     <subviews>
-                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="bUH-Wx-gaD">
-                            <rect key="frame" x="0.0" y="0.0" width="418" height="108"/>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="bUH-Wx-gaD">
+                            <rect key="frame" x="0.0" y="0.0" width="418" height="116"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IHJ-mH-IXV">
                                     <rect key="frame" x="0.0" y="0.0" width="418" height="40"/>
@@ -60,7 +60,7 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9hg-Wk-xlm">
-                                    <rect key="frame" x="0.0" y="48" width="418" height="60"/>
+                                    <rect key="frame" x="0.0" y="56" width="418" height="60"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Djh-Av-I4f">
                                             <rect key="frame" x="20" y="23" width="324" height="14.333333333333336"/>

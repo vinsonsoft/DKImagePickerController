@@ -11,24 +11,17 @@ import AVFoundation
 import Photos
 
 private extension UICollectionView {
-
-    func indexPathsForElements(in rect: CGRect, _ hidesCamera: Bool) -> [IndexPath] {
+    
+    func indexPathsForElements(in rect: CGRect) -> [IndexPath] {
         guard let allLayoutAttributes = collectionViewLayout.layoutAttributesForElements(in: rect) else {
             assertionFailure("Expect layoutAttributesForElements")
             return []
         }
-
-        if hidesCamera {
-            return allLayoutAttributes.map { $0.indexPath }
-        } else {
-            #if swift(>=4.1)
-            return allLayoutAttributes.compactMap { $0.indexPath.item == 0 ? nil : IndexPath(item: $0.indexPath.item - 1, section: $0.indexPath.section) }
-            #else
-            return allLayoutAttributes.flatMap { $0.indexPath.item == 0 ? nil : IndexPath(item: $0.indexPath.item - 1, section: $0.indexPath.section) }
-            #endif
-        }
+        
+        return allLayoutAttributes.map { $0.indexPath }
+        
     }
-
+    
 }
 
 ////////////////////////////////////////////////////////////
@@ -313,18 +306,11 @@ open class DKAssetGroupDetailVC: UIViewController,
     func fetchAsset(for index: Int) -> DKAsset? {
         guard let selectedGroupId = self.selectedGroupId else { return nil }
 
-        var assetIndex = index
-
-        if !self.hidesCamera && index == 0 {
-            return nil
-        }
-        assetIndex = (index - (self.hidesCamera ? 0 : 1))
-
         guard let group = imagePickerController?.groupDataManager.fetchGroup(with: selectedGroupId) else {
             assertionFailure("Expect group")
             return nil
         }
-        return imagePickerController?.groupDataManager.fetchAsset(group, index: assetIndex)
+        return imagePickerController?.groupDataManager.fetchAsset(group, index: index)
     }
 
     // select an asset at a specific index
@@ -359,10 +345,6 @@ open class DKAssetGroupDetailVC: UIViewController,
         imagePickerController.deselect(asset: asset)
         updateTitleView()
     }
-
-    public func adjustAssetIndex(_ index: Int) -> Int {
-        return self.hidesCamera ? index : index + 1
-    }
     
     public func scroll(to indexPath: IndexPath, animted: Bool = false) {
         if let cellFrame = self.collectionView?.collectionViewLayout.layoutAttributesForItem(at: indexPath)?.frame {
@@ -385,10 +367,6 @@ open class DKAssetGroupDetailVC: UIViewController,
             return (self.collectionView?.cellForItem(at: indexPath) as? DKAssetGroupDetailBaseCell)?
                 .thumbnailImageView
         }
-    }
-
-    func isCameraCell(indexPath: IndexPath) -> Bool {
-        return indexPath.row == 0 && !self.hidesCamera
     }
 
     // MARK: - Swiping
@@ -543,10 +521,6 @@ open class DKAssetGroupDetailVC: UIViewController,
         guard let panGesture = gestureRecognizer as? UIPanGestureRecognizer else { return false }
 
         let locationPoint = panGesture.location(in: self.collectionView)
-        if let indexPath = self.collectionView?.indexPathForItem(at: locationPoint),
-            self.isCameraCell(indexPath: indexPath) {
-            return false
-        }
 
         let velocityPoint = panGesture.velocity(in: nil)
         let x = abs(velocityPoint.x)
@@ -558,7 +532,7 @@ open class DKAssetGroupDetailVC: UIViewController,
 
     func showGallery(from cell: DKAssetGroupDetailBaseCell) {
         if let groupId = self.selectedGroupId {
-            let presentationIndex = cell.tag - 1 - (self.hidesCamera ? 0 : 1)
+            let presentationIndex = cell.tag - 1
             imagePickerController?.showGallery(with: presentationIndex,
                                                presentingFromImageView: cell.thumbnailImageView,
                                                groupId: groupId)
@@ -653,22 +627,17 @@ open class DKAssetGroupDetailVC: UIViewController,
     // MARK: - UICollectionViewDelegate, UICollectionViewDataSource methods
 
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		guard let selectedGroupId = self.selectedGroupId else { return self.hidesCamera ? 0 : 1 }
+		guard let selectedGroupId = self.selectedGroupId else { return 0 }
 
         guard let group = self.imagePickerController?.groupDataManager.fetchGroup(with: selectedGroupId) else {
             assertionFailure("Expect group")
             return 0
         }
-        return group.totalCount + (self.hidesCamera ? 0 : 1)
+        return group.totalCount
     }
 
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell: DKAssetGroupDetailBaseCell
-        if self.isCameraCell(indexPath: indexPath) {
-            cell = self.dequeueReusableCameraCell(for: indexPath)
-        } else {
-            cell = self.dequeueReusableCell(for: indexPath)
-        }
+        let cell = self.dequeueReusableCell(for: indexPath)
 
         if cell.imagePickerController == nil {
             cell.imagePickerController = self.imagePickerController
@@ -709,14 +678,7 @@ open class DKAssetGroupDetailVC: UIViewController,
     }
 
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if self.isCameraCell(indexPath: indexPath) {
-            collectionView .deselectItem(at: indexPath, animated: false)
-            if UIImagePickerController.isSourceTypeAvailable(.camera) {
-                self.imagePickerController?.presentCamera()
-            }
-        } else {
             self.selectAsset(atIndex: indexPath)
-        }
     }
 
     public func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
@@ -773,10 +735,10 @@ open class DKAssetGroupDetailVC: UIViewController,
         let (addedRects, removedRects) = self.differencesBetweenRects(self.previousPreheatRect, preheatRect)
 
         let addedAssets = addedRects
-            .flatMap { rect in collectionView.indexPathsForElements(in: rect, self.hidesCamera) }
+            .flatMap { rect in collectionView.indexPathsForElements(in: rect) }
             .compactMap { indexPath in imagePickerController.groupDataManager.fetchPHAsset(group, index: indexPath.item) }
         let removedAssets = removedRects
-            .flatMap { rect in collectionView.indexPathsForElements(in: rect, self.hidesCamera) }
+            .flatMap { rect in collectionView.indexPathsForElements(in: rect) }
             .compactMap { indexPath in imagePickerController.groupDataManager.fetchPHAsset(group, index: indexPath.item) }
 
         // Update the assets the PHCachingImageManager is caching.
