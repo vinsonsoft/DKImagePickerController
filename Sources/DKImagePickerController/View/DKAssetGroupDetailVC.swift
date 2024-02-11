@@ -72,7 +72,7 @@ open class DKAssetGroupDetailVC: UIViewController,
         imagePickerController.UIDelegate = CustomPhotosPermissionsManager(hasLimitedAccess: hasLimitedAccess,
                                                                           hidesCamera: hidesCamera,
                                                                           hidesVideo: hidesVideo)
-        
+        imagePickerController.UIDelegate.prepareLayout(imagePickerController, vc: self)
         imagePickerController.add(observer: self)
 
 		let layout = imagePickerController.UIDelegate.layoutForImagePickerController(imagePickerController).init()

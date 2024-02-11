@@ -30,7 +30,7 @@ class DKImagePickerControllerDemoVC: UITableViewController {
             let pickerController = DKImagePickerController()
             
             destination.pickerController = pickerController
-            
+            pickerController.showsCancelButton = true
         case "Pick Photos Only":
             let pickerController = DKImagePickerController()
             pickerController.assetType = .allPhotos
@@ -111,7 +111,7 @@ class DKImagePickerControllerDemoVC: UITableViewController {
             let pickerController = DKImagePickerController()
             pickerController.assetType = .allPhotos
             pickerController.UIDelegate = CustomUIDelegate()
-//            pickerController.showsCancelButton = true
+            pickerController.showsCancelButton = true
             
             destination.pickerController = pickerController
             

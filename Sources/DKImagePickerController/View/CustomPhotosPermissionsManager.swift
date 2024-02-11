@@ -57,18 +57,7 @@ open class CustomPhotosPermissionsManager: DKImagePickerControllerBaseUIDelegate
     
     override open func prepareLayout(_ imagePickerController: DKImagePickerController, vc: UIViewController) {
         self.imagePickerController = imagePickerController
-    }
-    
-    override open func imagePickerController(_ imagePickerController: DKImagePickerController,
-                                               showsCancelButtonForVC vc: UIViewController) {
-        vc.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel,
-                                                               target: imagePickerController,
-                                                               action: #selector(imagePickerController.dismiss as () -> Void))
-    }
-
-    override open func imagePickerController(_ imagePickerController: DKImagePickerController,
-                                               hidesCancelButtonForVC vc: UIViewController) {
-        vc.navigationItem.rightBarButtonItem =  UIBarButtonItem(customView: self.createDoneButtonIfNeeded())
+        vc.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: self.createDoneButtonIfNeeded())
     }
     
     override open func imagePickerControllerHeaderView(_ imagePickerController: DKImagePickerController) -> UIView? {

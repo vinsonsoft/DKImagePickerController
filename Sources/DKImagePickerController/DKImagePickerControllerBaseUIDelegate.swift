@@ -161,6 +161,7 @@ open class DKImagePickerControllerBaseUIDelegate: NSObject, DKImagePickerControl
                 button.setTitle(DKImagePickerControllerResource.localizedStringWithKey("picker.select.done.title"), for: .normal)
             }
         }
+        button.titleLabel?.font = Fonts.Buttons.font
         button.sizeToFit()
         handleBarButtonBug(button: button)
     }
@@ -202,9 +203,15 @@ open class DKImagePickerControllerBaseUIDelegate: NSObject, DKImagePickerControl
 
     open func imagePickerController(_ imagePickerController: DKImagePickerController,
                                     showsCancelButtonForVC vc: UIViewController) {
-        vc.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel,
-                                                              target: imagePickerController,
-                                                              action: #selector(imagePickerController.dismiss as () -> Void))
+        let button = UIButton(type: UIButton.ButtonType.custom)
+        button.setTitleColor(UINavigationBar.appearance().tintColor ?? self.imagePickerController.navigationBar.tintColor,
+                             for: .normal)
+        button.titleLabel?.font = Fonts.Buttons.font
+        button.setTitle(DKImagePickerControllerResource.localizedStringWithKey("cancel"),
+                        for: .normal)
+        button.addTarget(self.imagePickerController, action: #selector(imagePickerController.dismiss as () -> Void),
+                         for: .touchUpInside)
+        vc.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: button)
     }
 
     open func imagePickerController(_ imagePickerController: DKImagePickerController,
