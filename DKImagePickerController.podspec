@@ -64,6 +64,7 @@ Pod::Spec.new do |s|
 
   s.subspec 'PhotoEditor' do |photoEditor|
     photoEditor.dependency 'DKImagePickerController/Core'
+    photoEditor.dependency 'CropViewController'
 
     photoEditor.source_files = "Sources/Extensions/DKImageExtensionPhotoCropper.swift"
   end
