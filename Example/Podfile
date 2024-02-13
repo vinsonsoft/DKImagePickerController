@@ -7,7 +7,7 @@ inhibit_all_warnings!
 target 'DKImagePickerControllerDemo' do
 
   pod 'DKImagePickerController', :path => '../'
-
+  pod 'CropViewController', :git => 'https://github.com/vinsonsoft/TOCropViewController.git'
   # Pods for DKImagePickerControllerDemo
 
   target 'DKImagePickerControllerDemoTests' do
