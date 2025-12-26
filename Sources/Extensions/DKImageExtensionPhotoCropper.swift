@@ -11,6 +11,8 @@ import Foundation
 
 #if canImport(CropViewController)
 import CropViewController
+#else
+import TOCropViewController
 #endif
 
 open class DKImageExtensionPhotoCropper: DKImageBaseExtension {
@@ -30,7 +32,12 @@ open class DKImageExtensionPhotoCropper: DKImageBaseExtension {
         self.metadata = extraInfo["metadata"] as? [AnyHashable : Any]
         self.didFinishEditing = didFinishEditing
         
+#if canImport(CropViewController)
         let imageCropper = CropViewController(image: sourceImage)
+#else
+        let imageCropper = TOCropViewController(image: sourceImage)
+#endif
+        
         imageCropper.onDidCropToRect = { [weak self] image, _, _ in
             guard let strongSelf = self else { return }
             
