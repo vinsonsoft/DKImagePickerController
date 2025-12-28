@@ -25,7 +25,8 @@ open class DKImageExtensionPhotoCropper: DKImageBaseExtension {
         return .photoEditor
     }
         
-    override open func perform(with extraInfo: [AnyHashable: Any]) {
+    override open func perform(with extraInfo: [AnyHashable: Any],
+                               cameraCaptureMode: UIImagePickerController.CameraCaptureMode?) {
         guard let sourceImage = extraInfo["image"] as? UIImage
             , let didFinishEditing = extraInfo["didFinishEditing"] as? ((UIImage, [AnyHashable : Any]?) -> Void) else { return }
         

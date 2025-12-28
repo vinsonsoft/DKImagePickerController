@@ -15,7 +15,8 @@ open class DKImageExtensionInlineCamera: DKImageBaseExtension {
         return .inlineCamera
     }
         
-    override open func perform(with extraInfo: [AnyHashable: Any]) {
+    override open func perform(with extraInfo: [AnyHashable: Any],
+                               cameraCaptureMode: UIImagePickerController.CameraCaptureMode?) {
         guard let didFinishCapturingImage = extraInfo["didFinishCapturingImage"] as? ((UIImage, [AnyHashable : Any]?) -> Void)
             , let didCancel = extraInfo["didCancel"] as? (() -> Void) else { return }
         

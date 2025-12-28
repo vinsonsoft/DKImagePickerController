@@ -37,8 +37,8 @@ open class CustomPhotosPermissionsManager: DKImagePickerControllerBaseUIDelegate
                                                frame: CGRect(x: 0, y: 0, width: Int(width), height: height))
 
         manageCustomView.editLimitsBtn.addTarget(imagePickerController, action: #selector(DKImagePickerController.managePermission), for: .touchUpInside)
-        manageCustomView.takePhotoBtn.addTarget(imagePickerController, action: #selector(self.imagePickerController?.presentCamera), for: .touchUpInside)
-        manageCustomView.recordVideoBtn.addTarget(imagePickerController, action: #selector(self.imagePickerController?.presentCamera), for: .touchUpInside)
+        manageCustomView.takePhotoBtn.addTarget(imagePickerController, action: #selector(self.imagePickerController?.presentPhotoCamera), for: .touchUpInside)
+        manageCustomView.recordVideoBtn.addTarget(imagePickerController, action: #selector(self.imagePickerController?.presentVideoCamera), for: .touchUpInside)
         
         let header = UIView(frame: CGRect(x: 0, y: 0,
                                           width: Int(UIScreen.main.bounds.width), height: height))

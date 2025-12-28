@@ -16,7 +16,8 @@ open class CustomCameraExtension: DKImageBaseExtension, UIImagePickerControllerD
     var didFinishCapturingImage: ((_ image: UIImage, _ metadata: [AnyHashable : Any]?) -> Void)?
     var didFinishCapturingVideo: ((_ videoURL: URL) -> Void)?
     
-    open override func perform(with extraInfo: [AnyHashable : Any]) {
+    open override func perform(with extraInfo: [AnyHashable : Any],
+                               cameraCaptureMode: UIImagePickerController.CameraCaptureMode?) {
         guard let didFinishCapturingImage = extraInfo["didFinishCapturingImage"] as? ((UIImage, [AnyHashable : Any]?) -> Void)
             , let didFinishCapturingVideo = extraInfo["didFinishCapturingVideo"] as? ((URL) -> Void)
             , let didCancel = extraInfo["didCancel"] as? (() -> Void) else { return }
@@ -30,6 +31,9 @@ open class CustomCameraExtension: DKImageBaseExtension, UIImagePickerControllerD
         camera.videoQuality = .typeHigh
         camera.sourceType = .camera
         camera.mediaTypes = [kUTTypeImage as String, kUTTypeMovie as String]
+        if let cameraCaptureMode {
+            camera.cameraCaptureMode = cameraCaptureMode
+        }
         
         self.context.imagePickerController.present(camera)
     }

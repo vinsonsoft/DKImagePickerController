@@ -18,7 +18,8 @@ open class DKImageExtensionGallery: DKImageBaseExtension, DKPhotoGalleryDelegate
         return .gallery
     }
         
-    override open func perform(with extraInfo: [AnyHashable: Any]) {
+    override open func perform(with extraInfo: [AnyHashable: Any],
+                               cameraCaptureMode: UIImagePickerController.CameraCaptureMode?) {
         guard let groupDetailVC = self.context.groupDetailVC
             , let groupId = extraInfo["groupId"] as? String else { return }
         

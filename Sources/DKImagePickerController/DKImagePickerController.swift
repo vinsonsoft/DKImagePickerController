@@ -243,7 +243,7 @@ open class DKImagePickerController: DKUINavigationController, DKImageBaseManager
         
         if self.needShowInlineCamera && self.isInlineCamera {
             self.needShowInlineCamera = false
-            self.showCamera()
+            self.showCamera(cameraCaptureMode: .photo)
         }
         self.view.backgroundColor = .white
     }
@@ -254,8 +254,12 @@ open class DKImagePickerController: DKUINavigationController, DKImageBaseManager
         return groupVC
     }
     
-    @objc open func presentCamera() {
-        self.showCamera()
+    @objc open func presentPhotoCamera() {
+        self.showCamera(cameraCaptureMode: .photo)
+    }
+    
+    @objc open func presentVideoCamera() {
+        self.showCamera(cameraCaptureMode: .video)
     }
     
     @objc open override func present(_ viewControllerToPresent: UIViewController,
@@ -407,7 +411,7 @@ open class DKImagePickerController: DKUINavigationController, DKImageBaseManager
         }
     }
     
-    private func showCamera() {
+    private func showCamera(cameraCaptureMode: UIImagePickerController.CameraCaptureMode) {
         let didCancel = { [unowned self] () in
             self.didCancelCamera()
         }
@@ -428,7 +432,7 @@ open class DKImagePickerController: DKUINavigationController, DKImageBaseManager
                         extraInfo["metadata"] = metadata
                     }
                     
-                    strongSelf.extensionController.perform(extensionType: .photoEditor, with: extraInfo)
+                    strongSelf.extensionController.perform(extensionType: .photoEditor, with: extraInfo, cameraCaptureMode: cameraCaptureMode)
                 } else {
                     didFinishEditing(image, metadata)
                 }
@@ -462,7 +466,7 @@ open class DKImagePickerController: DKUINavigationController, DKImageBaseManager
             "didFinishCapturingVideo" : didFinishCapturingVideo,
             "didCancel" : didCancel,
             "containsGPSInMetadata" : self.containsGPSInMetadata
-            ])
+        ], cameraCaptureMode: cameraCaptureMode)
     }
     
     private func triggerSelectedChangedIfNeeded() {
@@ -846,7 +850,7 @@ open class DKImagePickerController: DKUINavigationController, DKImageBaseManager
             extraInfo["presentingFromImageView"] = presentingFromImageView
         }
         
-        self.extensionController.perform(extensionType: .gallery, with: extraInfo)
+        self.extensionController.perform(extensionType: .gallery, with: extraInfo, cameraCaptureMode: .photo)
     }
     
 }

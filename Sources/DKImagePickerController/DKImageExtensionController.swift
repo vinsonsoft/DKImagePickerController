@@ -25,7 +25,8 @@ public enum DKImageExtensionType: Int {
 public protocol DKImageExtensionProtocol {
     
     /// Starts the extension.
-    func perform(with extraInfo: [AnyHashable: Any])
+    func perform(with extraInfo: [AnyHashable: Any],
+                 cameraCaptureMode: UIImagePickerController.CameraCaptureMode?)
     
     /// Completes the extension.
     func finish()
@@ -41,7 +42,8 @@ open class DKImageBaseExtension: NSObject, DKImageExtensionProtocol {
         self.context = context
     }
     
-    open func perform(with extraInfo: [AnyHashable : Any]) {
+    open func perform(with extraInfo: [AnyHashable : Any],
+                      cameraCaptureMode: UIImagePickerController.CameraCaptureMode?) {
         fatalError("This method must be overridden.")
     }
     
@@ -98,7 +100,8 @@ open class DKImageExtensionController: NSObject {
         self.imagePickerController = imagePickerController
     }
     
-    public func perform(extensionType: DKImageExtensionType, with extraInfo: [AnyHashable : Any]) {
+    public func perform(extensionType: DKImageExtensionType, with extraInfo: [AnyHashable : Any],
+                        cameraCaptureMode: UIImagePickerController.CameraCaptureMode) {
         DKImageExtensionController.checkDefaultExtensions
         
         if let extensionClass = self.fetchExtensionClass(extensionType) {
@@ -108,7 +111,7 @@ open class DKImageExtensionController: NSObject {
                 self.cache[extensionType] = e
             }
             
-            e?.perform(with: extraInfo)
+            e?.perform(with: extraInfo, cameraCaptureMode: cameraCaptureMode)
         } else {
             // If the .camera extension is not found, then register it first using:
             // DKImageExtensionController.registerExtension(extensionClass: DKImageExtensionCamera.self, for: .camera)
