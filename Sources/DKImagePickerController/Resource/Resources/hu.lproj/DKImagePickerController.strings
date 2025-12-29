@@ -9,7 +9,7 @@
 //
 
 "permission.camera.title" = "Kérlek adj hozzáférést a Kamerához";
-
+"permission.microphone.title" = "Please Allow Microphone Access";
 "permission.photo.title" = "Kérlek adj hozzáférést a Fotókhoz";
 
 "permission.allow" = "Hozzáférés engedélyezése";

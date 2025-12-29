@@ -9,7 +9,7 @@
 //
 
 "permission.camera.title" = "카메라 권한을 허용해주세요.";
-
+"permission.microphone.title" = "Please Allow Microphone Access";
 "permission.photo.title" = "갤러리 권한을 허용해주세요.";
 
 "permission.allow" = "승인";

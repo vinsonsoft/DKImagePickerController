@@ -9,7 +9,7 @@
 //
 
 "permission.camera.title" = "Please Allow Camera Access";
-
+"permission.microphone.title" = "Please Allow Microphone Access";
 "permission.photo.title" = "Please Allow Photo Access";
 
 "permission.allow" = "Allow Access";

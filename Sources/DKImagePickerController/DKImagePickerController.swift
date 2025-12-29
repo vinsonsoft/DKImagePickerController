@@ -255,11 +255,84 @@ open class DKImagePickerController: DKUINavigationController, DKImageBaseManager
     }
     
     @objc open func presentPhotoCamera() {
-        self.showCamera(cameraCaptureMode: .photo)
+        checkCameraPermission {
+               self.showCamera(cameraCaptureMode: .photo)
+           }
     }
     
     @objc open func presentVideoCamera() {
-        self.showCamera(cameraCaptureMode: .video)
+        checkCameraPermission {
+               self.checkMicrophonePermission {
+                   self.showCamera(cameraCaptureMode: .video)
+               }
+           }
+    }
+    
+    private func checkCameraPermission(granted: @escaping () -> Void) {
+        switch AVCaptureDevice.authorizationStatus(for: .video) {
+        case .authorized:
+            granted()
+
+        case .notDetermined:
+            AVCaptureDevice.requestAccess(for: .video) { isGranted in
+                DispatchQueue.main.async {
+                    if isGranted {
+                        granted()
+                    }
+                }
+            }
+
+        case .denied, .restricted:
+            showOpenSettingsAlert(title: DKImagePickerControllerResource.localizedStringWithKey("permission.camera.title"))
+
+        @unknown default:
+            showOpenSettingsAlert(title: DKImagePickerControllerResource.localizedStringWithKey("permission.camera.title"))
+        }
+    }
+    private func checkMicrophonePermission(granted: @escaping () -> Void) {
+        switch AVCaptureDevice.authorizationStatus(for: .audio) {
+        case .authorized:
+            granted()
+
+        case .notDetermined:
+            AVCaptureDevice.requestAccess(for: .audio) { isGranted in
+                DispatchQueue.main.async {
+                    if isGranted {
+                        granted()
+                    }
+                }
+            }
+
+        case .denied, .restricted:
+            showOpenSettingsAlert(title: DKImagePickerControllerResource.localizedStringWithKey("permission.microphone.title"))
+
+        @unknown default:
+            showOpenSettingsAlert(title: DKImagePickerControllerResource.localizedStringWithKey("permission.microphone.title"))
+        }
+    }
+
+    private func showOpenSettingsAlert(title: String) {
+        let alert = UIAlertController(
+            title: title, message: nil,
+            preferredStyle: .alert
+        )
+
+        alert.addAction(UIAlertAction(title: DKImagePickerControllerResource.localizedStringWithKey("cancel"), style: .cancel))
+        alert.addAction(UIAlertAction(title: DKImagePickerControllerResource.localizedStringWithKey("change.settings"), style: .default) { [weak self] _ in
+            self?.gotoSettings()
+        })
+
+        present(alert, animated: true)
+    }
+    
+    @objc open func gotoSettings() {
+        if let appSettings = URL(string: UIApplication.openSettingsURLString) {
+            if #available(iOS 10.0, *) {
+                UIApplication.shared.open(appSettings, options: [:], completionHandler: nil)
+            } else {
+                UIApplication.shared.openURL(appSettings)
+            }
+        }
     }
     
     @objc open override func present(_ viewControllerToPresent: UIViewController,
@@ -267,7 +340,13 @@ open class DKImagePickerController: DKUINavigationController, DKImageBaseManager
                                      completion: (() -> Swift.Void)? = nil) {
         var targetVC: UIViewController = self
         if self.inline {
-            targetVC = UIApplication.shared.keyWindow!.rootViewController!
+            if let windowScene = UIApplication.shared.connectedScenes
+                .compactMap({ $0 as? UIWindowScene })
+                .first(where: { $0.activationState == .foregroundActive }),
+               let rootVC = windowScene.windows.first(where: { $0.isKeyWindow })?.rootViewController {
+
+                targetVC = rootVC
+            }
         }
         
         while let presentedViewController = targetVC.presentedViewController {

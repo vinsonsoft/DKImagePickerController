@@ -1,9 +1,9 @@
 //
-//  CustomCamera.swift
-//  DKImagePickerControllerDemo
+//  CustomCameraExtension.swift
+//  Bikers-App
 //
-//  Created by ZhangAo on 03/01/2017.
-//  Copyright © 2017 ZhangAo. All rights reserved.
+//  Created by Mohamed Alsheikh on 29/12/2025.
+//  Copyright © 2025 Amr. All rights reserved.
 //
 
 import UIKit
@@ -30,7 +30,11 @@ open class CustomCameraExtension: DKImageBaseExtension, UIImagePickerControllerD
         camera.delegate = self
         camera.videoQuality = .typeHigh
         camera.sourceType = .camera
-        camera.mediaTypes = [kUTTypeImage as String, kUTTypeMovie as String]
+        if cameraCaptureMode == .photo {
+            camera.mediaTypes = [kUTTypeImage as String]
+        } else if cameraCaptureMode == .video {
+            camera.mediaTypes = [kUTTypeMovie as String]
+        }
         if let cameraCaptureMode {
             camera.cameraCaptureMode = cameraCaptureMode
         }

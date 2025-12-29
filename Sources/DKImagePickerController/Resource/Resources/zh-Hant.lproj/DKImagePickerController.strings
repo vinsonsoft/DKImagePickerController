@@ -9,7 +9,7 @@
 //
 
 "permission.camera.title" = "請授權使用相機";
-
+"permission.microphone.title" = "Please Allow Microphone Access";
 "permission.photo.title" = "請授權使用照片";
 
 "permission.allow" = "允許";

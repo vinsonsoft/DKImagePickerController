@@ -9,7 +9,7 @@
 //
 
 "permission.camera.title" = "Bitte gestatte der App den Zugriff zur Kamera";
-
+"permission.microphone.title" = "Please Allow Microphone Access";
 "permission.photo.title" = "Bitte gestatte der App den Zugriff zu den Fotos";
 
 "permission.allow" = "Zugriff gestatten";

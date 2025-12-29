@@ -9,7 +9,7 @@
 //
 
 "permission.camera.title" = "براےْ مھربانی کیمرے کی رسائی کی اجازت دیں";
-
+"permission.microphone.title" = "Please Allow Microphone Access";
 "permission.photo.title" = "براےْ مھربانی تصویروں کی رسائی کی اجازت دیں";
 
 "permission.allow" = "اجازت دیں";

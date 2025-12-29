@@ -9,7 +9,7 @@
 //
 
 "permission.camera.title" = "Пожалуйста, разрешите доступ к камере";
-
+"permission.microphone.title" = "Please Allow Microphone Access";
 "permission.photo.title" = "Пожалуйста, разрешите доступ к фото";
 
 "permission.allow" = "Предоставить доступ";

@@ -9,6 +9,7 @@
 //
 
 "permission.camera.title" = "الرجاء السماح بالدخول إلى الكاميرا";
+"permission.microphone.title" = "الرجاء السماح بالدخول إلى الميكروفون";
 
 "permission.photo.title" = "الرجاء السماح بالدخول إلى الصور";
 

@@ -9,7 +9,7 @@
 //
 
 "permission.camera.title" = "カメラへのアクセスを許可してください";
-
+"permission.microphone.title" = "Please Allow Microphone Access";
 "permission.photo.title" = "写真へのアクセスを許可してください";
 
 "permission.allow" = "許可する";

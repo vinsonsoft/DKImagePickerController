@@ -9,7 +9,7 @@
 //
 
 "permission.camera.title" = "Vui lòng cho phép truy cập camera";
-
+"permission.microphone.title" = "Please Allow Microphone Access";
 "permission.photo.title" = "Vui lòng cho phép truy cập ảnh";
 
 "permission.allow" = "Cho phép truy cập";
