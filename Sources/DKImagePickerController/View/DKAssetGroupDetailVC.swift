@@ -129,15 +129,13 @@ open class DKAssetGroupDetailVC: UIViewController,
         navigationController?.navigationBar.isTranslucent = false
     }
     
-    
-    
     @available(iOS 13.0, *)
     func getUINavigationBarStandardAppearance() -> UINavigationBarAppearance {
         let appearance = UINavigationBarAppearance()
         appearance.backgroundColor = .white
         appearance.titleTextAttributes = [.foregroundColor: UIColor.black]
         appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.black]
-        appearance.shadowColor = .systemGray3
+        appearance.shadowColor = .clear
         return appearance
     }
     @available(iOS 13.0, *)
