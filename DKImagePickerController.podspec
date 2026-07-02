@@ -28,17 +28,33 @@ Pod::Spec.new do |s|
   end
   
   s.subspec 'ManageCustomView' do |manageCustomView|
-    manageCustomView.source_files = "Sources/ManageCustomView/**/*.{h,swift,xib,storyboard}"
+
+    manageCustomView.source_files =
+      "Sources/ManageCustomView/**/*.{h,swift}"
+
+    manageCustomView.resources = [
+      "Sources/ManageCustomView/**/*.{xib,storyboard}"
+    ]
   end
   
   s.subspec 'Fonts' do |fonts|
-    fonts.source_files = "Sources/Fonts/**/*.{h,swift,xib,storyboard,ttf}"
+
+    fonts.source_files =
+      "Sources/Fonts/**/*.{h,swift}"
+
+    fonts.resources = [
+      "Sources/Fonts/**/*.{ttf}"
+    ]
   end
   
   s.subspec 'Resource' do |resource|
-    resource.resource_bundle = { "DKImagePickerController" => "Sources/DKImagePickerController/Resource/Resources/*" }
 
-    resource.source_files = "Sources/DKImagePickerController/Resource/DKImagePickerControllerResource.swift"
+    resource.resources = [
+      "Sources/DKImagePickerController/Resource/Resources/**/*"
+    ]
+
+    resource.source_files =
+      "Sources/DKImagePickerController/Resource/DKImagePickerControllerResource.swift"
   end
 
   s.subspec 'PhotoGallery' do |gallery|
