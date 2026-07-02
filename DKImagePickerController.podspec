@@ -38,13 +38,7 @@ Pod::Spec.new do |s|
   end
   
   s.subspec 'Fonts' do |fonts|
-
-    fonts.source_files =
-      "Sources/Fonts/**/*.{h,swift}"
-
-    fonts.resources = [
-      "Sources/Fonts/**/*.{ttf}"
-    ]
+    fonts.source_files = "Sources/Fonts/**/*.{h,swift,xib,storyboard,ttf}"
   end
   
   s.subspec 'Resource' do |resource|
