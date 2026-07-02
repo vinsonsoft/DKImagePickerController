@@ -17,11 +17,32 @@ class ManageCustomView: UIView, NibInstantiatable {
     @IBOutlet weak var editLimitsBtn: UIButton!
     
     
-    static public func instance(hasLimitedAccess: Bool, hidesCamera: Bool, hidesVideo: Bool, frame: CGRect) -> ManageCustomView {
-       let view = ManageCustomView.fromNib()
+    static public func instance(
+        hasLimitedAccess: Bool,
+        hidesCamera: Bool,
+        hidesVideo: Bool,
+        frame: CGRect
+    ) -> ManageCustomView {
+        
+        let bundle = Bundle(for: ManageCustomView.self)
+        
+        guard let view = bundle.loadNibNamed(
+            "ManageCustomView",
+            owner: nil,
+            options: nil
+        )?.first as? ManageCustomView else {
+            
+            fatalError("Unable to load ManageCustomView.xib")
+        }
+        
         view.frame = frame
-
-        view.configView(hasLimitedAccess: hasLimitedAccess, hidesCamera: hidesCamera, hidesVideo: hidesVideo)
+        
+        view.configView(
+            hasLimitedAccess: hasLimitedAccess,
+            hidesCamera: hidesCamera,
+            hidesVideo: hidesVideo
+        )
+        
         return view
     }
     
