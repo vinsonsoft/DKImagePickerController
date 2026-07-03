@@ -17,12 +17,17 @@ public class DKImagePickerControllerResource: NSObject {
     /// Add a hook for custom localization.
     @objc public static var customLocalizationBlock: ((_ title: String) -> String?)?
     
-    public class func localizedStringWithKey(_ key: String, value: String? = nil) -> String {
-        return customLocalizationBlock?(key) ?? NSLocalizedString(key,
-                                                                  tableName: "DKImagePickerController",
-                                                                  bundle:Bundle.imagePickerControllerBundle(),
-                                                                  value: value ?? "",
-                                                                  comment: "")
+    public class func localizedStringWithKey(_ key: String,
+                                             value: String? = nil) -> String {
+        
+        return customLocalizationBlock?(key) ??
+        NSLocalizedString(
+            key,
+            tableName: "DKImagePickerController",
+            bundle: .imagePickerControllerBundle(),
+            value: value ?? "",
+            comment: ""
+        )
     }
     
     // MARK: - Images
@@ -98,13 +103,19 @@ public class DKImagePickerControllerResource: NSObject {
 
 private extension Bundle {
     
-    class func imagePickerControllerBundle() -> Bundle {
+    static func imagePickerControllerBundle() -> Bundle {
         #if SWIFT_PACKAGE
-            return Bundle.module
+        return .module
         #else
-            let assetPath = Bundle(for: DKImagePickerControllerResource.self).resourcePath!
-            return Bundle(path: (assetPath as NSString).appendingPathComponent("DKImagePickerController.bundle"))!
+        guard
+            let resourcePath = Bundle(for: DKImagePickerControllerResource.self).resourcePath,
+            let bundle = Bundle(path: (resourcePath as NSString)
+                .appendingPathComponent("DKImagePickerController.bundle"))
+        else {
+            return Bundle(for: DKImagePickerControllerResource.self)
+        }
+        
+        return bundle
         #endif
     }
-    
 }
