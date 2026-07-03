@@ -28,7 +28,7 @@ public class DKImagePickerControllerResource: NSObject {
     // MARK: - Images
     
     @objc public static var customImageBlock: ((_ imageName: String) -> UIImage?)?
-	
+    
     public class func checkedImage() -> UIImage {
         return imageForResource("ic_selected_image", stretchable: true, cacheable: true)
  
@@ -45,10 +45,10 @@ public class DKImagePickerControllerResource: NSObject {
     public class func videoCameraIcon() -> UIImage {
         return imageForResource("video_camera", stretchable: false, cacheable: true)
     }
-	
-	public class func emptyAlbumIcon() -> UIImage {
+    
+    public class func emptyAlbumIcon() -> UIImage {
         return imageForResource("empty_album", stretchable: true, cacheable: false)
-	}
+    }
     
     public class func photoGalleryCheckedImage() -> UIImage {
         return imageForResource("photoGallery_checked_image", stretchable: true, cacheable: true)
@@ -97,13 +97,14 @@ public class DKImagePickerControllerResource: NSObject {
 }
 
 private extension Bundle {
-
+    
     class func imagePickerControllerBundle() -> Bundle {
-
         #if SWIFT_PACKAGE
-        return Bundle.module
+            return Bundle.module
         #else
-        return Bundle(for: DKImagePickerControllerResource.self)
+            let assetPath = Bundle(for: DKImagePickerControllerResource.self).resourcePath!
+            return Bundle(path: (assetPath as NSString).appendingPathComponent("DKImagePickerController.bundle"))!
         #endif
     }
+    
 }
