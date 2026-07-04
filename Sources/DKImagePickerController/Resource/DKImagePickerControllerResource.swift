@@ -119,3 +119,32 @@ private extension Bundle {
         #endif
     }
 }
+private final class BundleToken {}
+
+extension Bundle {
+    
+    static var podResources: Bundle = {
+        
+        #if SWIFT_PACKAGE
+        return .module
+        #else
+        
+        let candidates = [
+            Bundle.main.resourceURL,
+            Bundle(for: BundleToken.self).resourceURL,
+            Bundle.main.bundleURL
+        ]
+        
+        for candidate in candidates {
+            let bundleURL = candidate?.appendingPathComponent("YourPodName.bundle")
+            
+            if let bundleURL,
+               let bundle = Bundle(url: bundleURL) {
+                return bundle
+            }
+        }
+        
+        return Bundle(for: BundleToken.self)
+        #endif
+    }()
+}

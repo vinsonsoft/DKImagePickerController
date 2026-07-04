@@ -28,7 +28,12 @@ Pod::Spec.new do |s|
   end
   
   s.subspec 'ManageCustomView' do |manageCustomView|
-    manageCustomView.source_files = "Sources/ManageCustomView/**/*.{h,swift,xib,storyboard}"
+    manageCustomView.source_files = "Sources/ManageCustomView/**/*.{h,swift}"
+
+    manageCustomView.resources = [
+      "Sources/ManageCustomView/**/*.xib",
+      "Sources/ManageCustomView/**/*.storyboard"
+    ]
   end
   
   s.subspec 'Fonts' do |fonts|
