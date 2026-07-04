@@ -15,13 +15,51 @@ class ManageCustomView: UIView, NibInstantiatable {
     @IBOutlet weak var takePhotoBtn: UIButton!
     @IBOutlet weak var recordVideoBtn: UIButton!
     @IBOutlet weak var editLimitsBtn: UIButton!
-    
-    
-    static public func instance(hasLimitedAccess: Bool, hidesCamera: Bool, hidesVideo: Bool, frame: CGRect) -> ManageCustomView {
-       let view = ManageCustomView.fromNib()
+
+    static public func instance(
+        hasLimitedAccess: Bool,
+        hidesCamera: Bool,
+        hidesVideo: Bool,
+        frame: CGRect
+    ) -> ManageCustomView {
+
+        let bundle = Bundle(for: self)
+
+        var view = bundle.loadNibNamed(
+            "ManageCustomView",
+            owner: nil,
+            options: nil
+        )?.first as? ManageCustomView
+
+        // fallback for CocoaPods resource bundles
+        if view == nil {
+
+            for bundle in Bundle.allBundles + Bundle.allFrameworks {
+
+                view = bundle.loadNibNamed(
+                    "ManageCustomView",
+                    owner: nil,
+                    options: nil
+                )?.first as? ManageCustomView
+
+                if view != nil {
+                    break
+                }
+            }
+        }
+
+        guard let view else {
+            fatalError("ManageCustomView.xib not found")
+        }
+
         view.frame = frame
 
-        view.configView(hasLimitedAccess: hasLimitedAccess, hidesCamera: hidesCamera, hidesVideo: hidesVideo)
+        view.configView(
+            hasLimitedAccess: hasLimitedAccess,
+            hidesCamera: hidesCamera,
+            hidesVideo: hidesVideo
+        )
+
         return view
     }
     
