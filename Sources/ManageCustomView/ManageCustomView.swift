@@ -71,6 +71,7 @@ class ManageCustomView: UIView, NibInstantiatable {
     func configLimittedPermisionView(hasLimitedAccess: Bool) {
         LimittedPermisionView.isHidden = !hasLimitedAccess
         LimittedPermisionLbl.text = DKImagePickerControllerResource.localizedStringWithKey("limited.photo.access")
+        editLimitsBtn.setImage(DKImagePickerControllerResource.imageForResource("ic_edit_icon"), for: .normal)
     }
     
     func configCameraView(hidesCamera: Bool, hidesVideo: Bool) {

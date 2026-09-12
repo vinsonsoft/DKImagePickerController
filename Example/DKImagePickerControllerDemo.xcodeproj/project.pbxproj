@@ -220,7 +220,6 @@
 				D2AC38B79420FD3B25450A01 /* Pods-DKImagePickerControllerDemoTests.debug.xcconfig */,
 				36E343C82ECB7A0E463E66FD /* Pods-DKImagePickerControllerDemoTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -290,12 +289,12 @@
 				TargetAttributes = {
 					9C35CBFE19DBB00700557269 = {
 						CreatedOnToolsVersion = 6.0;
-						DevelopmentTeam = 7MLVDVH5PU;
+						DevelopmentTeam = 98QYHH6CFG;
 						LastSwiftMigration = 0800;
 					};
 					9CF72B101B8F073400238B9A = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = 7MLVDVH5PU;
+						DevelopmentTeam = 98QYHH6CFG;
 						LastSwiftMigration = 1100;
 						TestTargetID = 9C35CBFE19DBB00700557269;
 					};
@@ -607,7 +606,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 7MLVDVH5PU;
+				DEVELOPMENT_TEAM = 98QYHH6CFG;
 				INFOPLIST_FILE = DKImagePickerControllerDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -629,7 +628,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 7MLVDVH5PU;
+				DEVELOPMENT_TEAM = 98QYHH6CFG;
 				INFOPLIST_FILE = DKImagePickerControllerDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -649,7 +648,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 7MLVDVH5PU;
+				DEVELOPMENT_TEAM = 98QYHH6CFG;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
